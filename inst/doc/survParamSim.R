@@ -58,6 +58,9 @@ plot_km_pi(km.pi) +
   labs(y = "Recurrence free rate") +
   expand_limits(y = 0)
 
+## ----km_pi_table--------------------------------------------------------------
+extract_median_surv(km.pi)
+
 ## ----km_pi_group--------------------------------------------------------------
 km.pi <- calc_km_pi(sim, trt = "rx", group = c("node4", "depth"))
 
@@ -71,4 +74,7 @@ hr.pi <- calc_hr_pi(sim, trt = "rx", group = c("depth"))
 
 hr.pi
 plot_hr_pi(hr.pi)
+
+## ----hr_pi_table--------------------------------------------------------------
+extract_hr_pi(hr.pi)
 
