@@ -1,4 +1,11 @@
-# survParamSim 0.1.1 (in development)
+
+# survParamSim 0.1.2 (in development)
+
+## Minor changes
+
+* Bug fix of surv_param_sim_resample
+
+# survParamSim 0.1.1
 
 ## Minor changes
 
