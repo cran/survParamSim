@@ -1,6 +1,6 @@
-31d8224a2dfb54760885bb9525a4278c *DESCRIPTION
+c659880cd6dce2dd58a87acfda36fea3 *DESCRIPTION
 951b21bdcec593b55c10eefe713b2fef *NAMESPACE
-6a14f3439c986495198a160e46939be4 *NEWS.md
+20bf997b9b0607043376fd20a8fb59de *NEWS.md
 224a57ebd989c13ebc4c0ef127411e97 *R/calc_hr_pi.R
 c1890d7cb572b6a223a4ed73f2fa8bd4 *R/calc_km_pi.R
 a3c7addbe8af427d8264ca6537cd11fd *R/extract_pi.R
@@ -10,7 +10,7 @@ df8c6845faeb109a26656fe2637320cc *R/surv_param_sim.R
 52d5b6e155271685ff2da07fe82f8928 *R/survparamsim-methods.R
 4813f4d51616617f8ec0cb00f51df974 *R/utils.R
 352f4c1be3093c003996fa918f23faee *R/yyy.R
-acc33e45c821e4270ebfac30f4ee433b *README.md
+ae312b97ea9aedbc138c510d75e228a1 *README.md
 2154e8e7615973b41b1d1209a95eeaa9 *build/vignette.rds
 0a3e5b87172d72c55fa1ed8c41557681 *inst/doc/survParamSim.R
 2e687ea4a9ec68e3f8deca1698c4b5a5 *inst/doc/survParamSim.Rmd
@@ -19,9 +19,9 @@ d2f75de1eb572d43712f985f8fe6fca7 *man/calc_hr_pi.Rd
 ee109e311827f57b3d8d80e9e1491195 *man/calc_km_pi.Rd
 4b160ae054110532ef395253e2a56f4d *man/extractpi.Rd
 c38b177737e148d544412d24a61aed25 *man/extractrawsim.Rd
-dfb9e1c70ff7028954bc6cd10639fafd *man/figures/README-hr_pi-1.png
+27fb13e48b13cd160fe64f3836a1b71c *man/figures/README-hr_pi-1.png
 ec1c688b3a2a9b437daf489de692fb33 *man/figures/README-km_pi-1.png
-50069561c0cc90b140bf87f904350306 *man/figures/README-km_pi_group-1.png
+95b25d9f021c963a4ac6399281cfd335 *man/figures/README-km_pi_group-1.png
 2f7ef71f5c1f95b5a23ecc50e1c5cc76 *man/pipe.Rd
 2f67811b93a5a2519d421f32f3ac1112 *man/plot_hr_pi.Rd
 f9a7084a2af5629158680377938f969c *man/plot_km_pi.Rd
@@ -34,8 +34,9 @@ a823bd47df54bb9977904e9e535e2899 *tests/figs/test-calc-km-pi/km-plot-with-sex-an
 cf248e5f9b02700f5a9e240b915ec22a *tests/figs/test-calc-km-pi/long-sim-time-truncating-with-censor.svg
 62c75ea430c175e6dd8e4615397caf85 *tests/figs/test-calc-km-pi/no-observed-km-curves.svg
 175a23d45dbf1ba54c808da36e5a5d34 *tests/testthat.R
+013de0de8df55bed6f11aaef33e853ab *tests/testthat/helper-utils.R
 0b539c157d749ab3b913a7fe81bcfc92 *tests/testthat/test-calc_hr_pi.R
-c8bede011faf6201cc50966a958b6895 *tests/testthat/test-calc_km_pi.R
+8b3fa1c64d2c46f5e0ddbeae58ac7e93 *tests/testthat/test-calc_km_pi.R
 85165baa26c3673b10b9ca45d3df51ac *tests/testthat/test-extract_raw_sim.R
 d2f442c52d621dae9c41d5907ff13a6d *tests/testthat/test-surv_param_sim.R
 ef556a26b49975e123e0953038c31bab *tests/testthat/test-surv_param_sim_resample.R
