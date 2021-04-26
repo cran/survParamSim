@@ -8,14 +8,17 @@ if(getRversion() >= "2.15.1"){
                            'n', 'description', 'quantile', 'event'))
 
   # calc_hr
-  utils::globalVariables(c('coxfit', 'HR'))
+  utils::globalVariables(c('coxfit', 'HR', 'term', 'estimate'))
 
   # calc_km
-  utils::globalVariables(c('kmfit', 'km', 'surv', 'time', 'cnsr'))
+  utils::globalVariables(c('kmfit', 'km', 'surv', 'time', 'cnsr',
+                           'is.median.na', 'N.median.NA', 'N.all', 'n_min', 'n_max',
+                           '.trt.control.group', '.trt.group.1', '.trt.group.index', 'median_delta'))
 
   # extract sim
   utils::globalVariables(c('n.resample', 'covec50', 'cove0', 'covemaxstr', 'covec50str', 'cove0str',
-                           'covemaxfct', 'covec50fct', 'cove0fct', 'Covariates'))
+                           'covemaxfct', 'covec50fct', 'cove0fct', 'Covariates',
+                           '.delta'))
 
   # replace_prm_names
   utils::globalVariables(c('prmname', 'prmname2', 'index', 'prm', 'level'))

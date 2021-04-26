@@ -52,14 +52,13 @@ km.pi <- calc_km_pi(sim, trt = "rx")
 km.pi
 
 ## ----km_pi_plot---------------------------------------------------------------
-km.pi
 plot_km_pi(km.pi) +
   theme(legend.position = "bottom") +
   labs(y = "Recurrence free rate") +
   expand_limits(y = 0)
 
 ## ----km_pi_table--------------------------------------------------------------
-extract_median_surv(km.pi)
+extract_medsurv_pi(km.pi)
 
 ## ----km_pi_group--------------------------------------------------------------
 km.pi <- calc_km_pi(sim, trt = "rx", group = c("node4", "depth"))

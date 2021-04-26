@@ -1,21 +1,25 @@
 #' Simulation of parametric survival model
 #'
-#' The main function to generate predicted survival using a model object
-#' generated with \code{\link[survival]{survreg}} function.
+#' The main function(s) to generate predicted survival using a model object
+#' generated with [survival::survreg()] function.
 #'
+#' @name survparamsim
+NULL
+
+
 #' @rdname survparamsim
 #' @export
 #' @param object A `survreg` class object. Currently accept exponential,
 #'   lognormal, weibull, loglogistic, and gaussian distributions.
 #' @param newdata A required data frame for simulation that contain covariates in
 #'   the survival model. It is required even if this is the same as the one used
-#'   for \code{\link[survival]{survreg}} function.
+#'   for [survival::survreg] function.
 #'
 #'   It also has to contain columns for survival information. These can be used
-#'   in \code{\link{plot_km_pi}} and \code{\link{plot_hr_pi}} function as
+#'   in [plot_km_pi()] and [plot_hr_pi()] function as
 #'   observed data. Survival information can be dummy data, but time need to be
 #'   long enough so that simulated KM plot will be long enough for
-#'   \code{\link{plot_km_pi}} to draw simulated survival curves.
+#'   [plot_km_pi()] to draw simulated survival curves.
 #'
 #'   Subjects with NA for covariates in `survreg` model will be removed from
 #'   the simulation and subsequent plotting of observed data.
@@ -41,11 +45,16 @@
 #'   }
 #'
 #' @details
-#' \code{\link{surv_param_sim}} returns simulation using the provided subject
+#' [surv_param_sim()] returns simulation using the provided subject
 #' in `newdata` as it is, while \code{\link{surv_param_sim_resample}} perform
 #' simulation based on resampled subjects from the dataset. The latter allows
 #' more flexibility in terms of simulating future trials with different number
 #' of subjects.
+#' Note that with [surv_param_sim_resample()], there is no
+#' automatic safeguard to ensure certain number of subjects in each subgroup
+#' or treatment groups, which may result in inconsistent number of subjects per
+#' simulation or leads to Cox regression instability due to small N. Consider
+#' using stratified resampling in this case.
 #'
 #' Currently we have not tested whether this function work for a `survreg` model
 #' with stratification variables.
@@ -157,10 +166,12 @@ surv_param_sim <- function(object, newdata, n.rep = 1000, censor.dur = NULL,
     .$subj.sim %>%
     as.integer()
 
-  sim <- data.frame(time = as.vector(preds),
-                    event= as.vector(event.status),
-                    rep  = rep(1:n.rep,  times=n.subj),
-                    subj.sim = rep(subj.sim.id,  each =n.rep))
+  sim <-
+    data.frame(time = as.vector(preds),
+               event= as.vector(event.status),
+               rep  = rep(1:n.rep,  times=n.subj),
+               subj.sim = rep(subj.sim.id,  each =n.rep)) %>%
+    dplyr::arrange(rep, subj.sim)
 
   newdata <-
     newdata %>%
@@ -174,13 +185,24 @@ surv_param_sim <- function(object, newdata, n.rep = 1000, censor.dur = NULL,
     dplyr::filter(subj.sim %in% subj.sim.id)
 
 
+  ## Last observed time to be used for KM calculations
+  ### Calculate last time from original dataset just in case newdata's survival data is dummy
+  formula <-
+    paste(attributes(formula(object))$variables,"~1")[2] %>%
+    stats::as.formula()
+
+  t.last.newdata  <- survival::survfit(formula, data = newdata) %>% .$time
+  t.last.origdata <- as.numeric(object$y[,1])
+
+  t.last.orig.new <-max(c(t.last.newdata, t.last.origdata))
+
   # Create a list for output
   out <- list()
 
   out$survreg <- object
-  out$newdata <- newdata
-  out$newdata.nona.obs <- newdata.nona
-  out$newdata.nona.sim <- newdata.nona
+  out$t.last.orig.new <- t.last.orig.new
+  out$newdata.nona.obs <- newdata.nona # Used for obs HR & KM calculation and check TRT variables in calc_hr_pi
+  out$newdata.nona.sim <- newdata.nona # Used for grouping assignment in sim HR & K-M
   out$sim <- sim
   out$censor.dur <- censor.dur
 
