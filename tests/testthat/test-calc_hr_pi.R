@@ -23,7 +23,8 @@ hr.pi <- calc_hr_pi(sim, trt = "sex")
 newdata.3trt <-
   newdata %>%
   dplyr::mutate(trt = rep(c("B", "A", "CC"), length.out = nrow(.)),
-                trt = factor(trt, levels = c("B", "A", "CC")))
+                trt = factor(trt, levels = c("B", "A", "CC")),
+                trto= factor(trt, levels = c("B", "A", "CC"), ordered = T))
 # This will also test calculating grouping based on the variables not included in the model formula
 fit.lung.3trt <- survreg(Surv(time, status) ~ sex + ph.ecog, data = newdata.3trt)
 
@@ -82,12 +83,13 @@ test_that("not all groups have both treatment arms", {
 test_that("check HR calculation", {
   hr.pi.raw <- extract_hr(hr.pi)
 
-  expect_equal(dim(hr.pi.raw), c(30, 3))
+  expect_equal(dim(hr.pi.raw), c(30, 5))
   expect_equal(hr.pi.raw$HR[[1]], 0.708, tolerance = .001)
+  expect_equal(hr.pi.raw$p.value.logrank[[1]], 0.0340, tolerance = .001)
 
 
   hr.pi.raw.group <- extract_hr(calc_hr_pi(sim, trt = "sex", group = "ph.ecog", trt.assign = "rev"))
-  expect_equal(dim(hr.pi.raw.group), c(90, 4))
+  expect_equal(dim(hr.pi.raw.group), c(90, 6))
   expect_equal(hr.pi.raw.group$HR[[1]], 1.3, tolerance = .01)
 })
 
@@ -120,5 +122,8 @@ test_that("test trt with >2 levels", {
   expect_equal(hr.pi.quantile$HR[[5]], 0.758, tolerance = .001)
   expect_equal(hr.pi.quantile$trt[[5]], factor("A", levels = c("B", "A", "CC")))
 
+  expect_error(calc_hr_pi(sim.3trt, trt = "trto"), "`trt` cannot be an ordered factor")
+
 })
+
 

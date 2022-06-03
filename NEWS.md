@@ -1,4 +1,9 @@
 
+# survParamSim 0.1.6
+
+## Minor changes
+
+* Fix error when the same variable is included in both `group` and `trt` for `calc_km_pi()`
 
 # survParamSim 0.1.5
 
