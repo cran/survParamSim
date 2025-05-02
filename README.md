@@ -52,6 +52,7 @@ library(dplyr)
 library(ggplot2)
 library(survival)
 library(survParamSim)
+#> Warning: package 'survParamSim' was built under R version 4.2.3
 
 set.seed(12345)
 
@@ -123,20 +124,20 @@ plot_km_pi(km.pi) +
 <img src="man/figures/README-km_pi_group-1.png" width="100%" />
 
 ``` r
-extract_medsurv_pi(km.pi)
-#> # A tibble: 32 x 7
+extract_medsurv_pi(km.pi) # Not implemented for calc_ave_km_pi yet; available for calc_km_pi
+#> # A tibble: 32 × 7
 #>    node4 depth rx          n description median quantile
 #>    <dbl> <dbl> <fct>   <dbl> <chr>        <dbl>    <dbl>
-#>  1     0     0 Obs       193 pi_low       1257.    0.025
-#>  2     0     0 Obs       193 pi_med       1895.    0.5  
-#>  3     0     0 Obs       193 pi_high      2713.    0.975
-#>  4     0     0 Obs       193 obs          1436    NA    
-#>  5     0     0 Lev+5FU   192 pi_low       2429.    0.025
-#>  6     0     0 Lev+5FU   192 pi_med       2716.    0.5  
-#>  7     0     0 Lev+5FU   192 pi_high      2908.    0.975
-#>  8     0     0 Lev+5FU   192 obs            NA    NA    
-#>  9     0     1 Obs        35 pi_low       1539.    0.025
-#> 10     0     1 Obs        35 pi_med       2558.    0.5  
+#>  1     0     0 Obs       193 pi_low       1257.   0.0250
+#>  2     0     0 Obs       193 pi_med       1895.   0.5   
+#>  3     0     0 Obs       193 pi_high      2713.   0.975 
+#>  4     0     0 Obs       193 obs          1436   NA     
+#>  5     0     0 Lev+5FU   192 pi_low       2429.   0.0250
+#>  6     0     0 Lev+5FU   192 pi_med       2716.   0.5   
+#>  7     0     0 Lev+5FU   192 pi_high      2908.   0.975 
+#>  8     0     0 Lev+5FU   192 obs            NA   NA     
+#>  9     0     1 Obs        35 pi_low       1539.   0.0250
+#> 10     0     1 Obs        35 pi_med       2558.   0.5   
 #> # … with 22 more rows
 ```
 
@@ -164,15 +165,15 @@ plot_hr_pi(hr.pi)
 
 ``` r
 extract_hr_pi(hr.pi)
-#> # A tibble: 8 x 5
+#> # A tibble: 8 × 5
 #>   depth rx      description    HR quantile
 #>   <dbl> <fct>   <chr>       <dbl>    <dbl>
-#> 1     0 Lev+5FU pi_low      0.464    0.025
-#> 2     0 Lev+5FU pi_med      0.624    0.5  
-#> 3     0 Lev+5FU pi_high     0.794    0.975
-#> 4     0 Lev+5FU obs         0.590   NA    
-#> 5     1 Lev+5FU pi_low      0.233    0.025
-#> 6     1 Lev+5FU pi_med      0.597    0.5  
-#> 7     1 Lev+5FU pi_high     1.13     0.975
-#> 8     1 Lev+5FU obs         0.607   NA
+#> 1     0 Lev+5FU pi_low      0.464   0.0250
+#> 2     0 Lev+5FU pi_med      0.624   0.5   
+#> 3     0 Lev+5FU pi_high     0.794   0.975 
+#> 4     0 Lev+5FU obs         0.590  NA     
+#> 5     1 Lev+5FU pi_low      0.233   0.0250
+#> 6     1 Lev+5FU pi_med      0.597   0.5   
+#> 7     1 Lev+5FU pi_high     1.13    0.975 
+#> 8     1 Lev+5FU obs         0.607  NA
 ```
